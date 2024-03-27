@@ -1,12 +1,10 @@
-const express =require('express');
-
+const express=require('express');
 const {PORT}=require('./config/serverConfig');
-const app=express();
+const app= express();
 
 const prepareAndStartServer=()=>{
-    app.listen(3000,()=>{
-        console.log(`server start on PORT:${PORT}`);
-    })
+    app.listen(PORT,()=>{
+        console.log(`server start on Port:${PORT}`);
+    });
 }
 prepareAndStartServer();
-
