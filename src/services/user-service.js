@@ -47,6 +47,31 @@ return newJWT;
        }
 }
 
+async isAuthenticated(token){
+    try {
+        const response=this.verifyToken(token);
+        if(!response){
+            throw{
+                error:'invalid token'
+            }
+        }
+            const user=this.UserRepository.getById(response.id);
+            if(!user){
+                throw{
+                    error:"no user with the corresponding token exists"
+                }
+                return user.id;
+                
+            }
+        }
+     catch (error) {
+        console.log("something went wrong in signin process in serive layer");
+          throw error;
+    }
+}
+
+
+
     createToken(user){
 try {
     const result=jwt.sign(user,JWT_KEY,
