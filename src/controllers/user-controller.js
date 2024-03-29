@@ -11,12 +11,12 @@ const create = async (req, res) => {
     });
     return res.status(201).json({
       success: true,
-      message: "successfully created new user",
+      message: error.message,
       data: response,
       err: {},
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(error.statusCode).json({
       message:error.message,
       data: [],
@@ -39,11 +39,12 @@ const signIn = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
-      message: "something went wrong in signIn function in controller",
+    
+    return res.status(error.statusCode).json({
+      message: error.message,
       data: [],
       success: false,
-      err: error,
+      err: error.explanation,
     });
   }
 };

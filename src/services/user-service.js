@@ -2,7 +2,7 @@ const UserRepository = require("../repository/user-repository");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { JWT_KEY } = require("../config/serverConfig");
-const AppErrors=require('../utils/error-handler');
+const AppErrors = require("../utils/error-handler");
 class UserService {
   constructor() {
     this.UserRepository = new UserRepository();
@@ -16,16 +16,15 @@ class UserService {
         throw error;
       }
       console.log("something went wrong in service layer");
-    //   throw new AppErrors(
-    //     "ServerError",
-    //     "Something went wrong in service ",
-    //     "Logical Issue Found",
-    //     500
-    //   );
-    throw error;
+      //   throw new AppErrors(
+      //     "ServerError",
+      //     "Something went wrong in service ",
+      //     "Logical Issue Found",
+      //     500
+      //   );
+      throw error;
     }
   }
-
 
   async signIn(email, plainPassword) {
     try {
@@ -50,7 +49,10 @@ class UserService {
       });
       return newJWT;
     } catch (error) {
-      console.log("something went wrong in signin process in serive layer");
+      if (error.name == "Attribute NotFound") {
+        throw error;
+      }
+      console.log("something went wrong in signin process in service layer");
       throw error;
     }
   }

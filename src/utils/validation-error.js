@@ -1,7 +1,7 @@
 const AppError = require("./error-handler");
 const { StatusCodes } = require("http-status-codes");
 
-class validationError extends AppError {
+class ValidationError extends AppError {
   constructor(error) {
     let errorName = error.name;
     let explaination=[];
@@ -17,4 +17,4 @@ explanation.push(err.message);
     );
   }
 }
-module.exports=validationError;
+module.exports=ValidationError;
