@@ -55,13 +55,13 @@ async isAuthenticated(token){
                 error:'invalid token'
             }
         }
-            const user=this.UserRepository.getById(response.id);
+            const user=await this.UserRepository.getById(response.id);
             if(!user){
                 throw{
                     error:"no user with the corresponding token exists"
                 }
                 return user.id;
-                
+
             }
         }
      catch (error) {
