@@ -32,11 +32,13 @@ db.sequelize.sync({
 }
 
 const u1=await User.findByPk(5);
-const r1=await Role.findByPk(3);
+const r1=await Role.findByPk(1);
 
 // u1.addRole(r1);
+console.log("before has roleeeeeeeeeee");
 const response=await u1.hasRole(r1);
-console.log(response);
+console.log("after has roleeeeeeeeeee");
+// console.log(response);
 
 
 
