@@ -12,6 +12,7 @@ router.post(
     );
 router.post(
     '/signin',
+    AuthRequestValidators.validateUserAuth,
     UserController.signIn,
     );
 

@@ -11,7 +11,7 @@ const create = async (req, res) => {
     });
     return res.status(201).json({
       success: true,
-      message: error.message,
+      message:'successfully created a new user ',
       data: response,
       err: {},
     });
@@ -19,7 +19,7 @@ const create = async (req, res) => {
     // console.log(error);
     return res.status(error.statusCode).json({
       message:error.message,
-      data: [],
+      data: {},
       success: false,
       err: error.explanation,
     });

@@ -5,24 +5,24 @@ const { JWT_KEY } = require("../config/serverConfig");
 const AppErrors = require("../utils/error-handler");
 class UserService {
   constructor() {
-    this.UserRepository = new UserRepository();
+    this.userRepository = new UserRepository();
   }
   async create(data) {
     try {
-      const user = await this.UserRepository.create(data);
+      const user = await this.userRepository.create(data);
       return user;
     } catch (error) {
       if (error.name == "SequelizeValidationError") {
         throw error;
       }
       console.log("something went wrong in service layer");
-      //   throw new AppErrors(
-      //     "ServerError",
-      //     "Something went wrong in service ",
-      //     "Logical Issue Found",
-      //     500
-      //   );
-      throw error;
+        throw new AppErrors(
+          "ServerError",
+          "Something went wrong in service ",
+          "Logical Issue Found",
+          500
+        );
+      // throw error;
     }
   }
 
@@ -30,7 +30,7 @@ class UserService {
     try {
       //step -1  fetch the user by using email
 
-      const user = await this.UserRepository.getByEmail(email);
+      const user = await this.userRepository.getByEmail(email);
 
       //step -2  comapre incoming plain password to store encrypted password
 
@@ -65,7 +65,7 @@ class UserService {
           error: "invalid token",
         };
       }
-      const user = await this.UserRepository.getById(response.id);
+      const user = await this.userRepository.getById(response.id);
       if (!user) {
         throw {
           error: "no user with the corresponding token exists",
@@ -112,7 +112,7 @@ class UserService {
 
   isAdmin(userId) {
     try {
-      return this.UserRepository.isAdmin(userId);
+      return this.userRepository.isAdmin(userId);
     } catch (error) {
       console.log("something went wrong in isAdmin in service layer");
       throw error;
